@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>cn.hollis</groupId>
+        <artifactId>NFTurbo</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>cn.hollis</groupId>
+    <artifactId>dp-nft-business</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <application.name>dp-nft-business</application.name>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>dp-nft-notice</module>
+        <module>dp-nft-chain</module>
+        <module>dp-nft-collection</module>
+        <module>dp-nft-pay</module>
+        <module>dp-nft-app</module>
+        <module>dp-nft-order</module>
+        <module>dp-nft-user</module>
+        <module>dp-nft-trade</module>
+        <module>dp-nft-goods</module>
+    </modules>
+
+</project>

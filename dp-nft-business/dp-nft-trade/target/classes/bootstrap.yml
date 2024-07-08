@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: nfturbo-trade
+  config:
+    import: classpath:config.yml

@@ -1,0 +1,16 @@
+dubbo:
+  consumer:
+    timeout: 3000
+    check: false
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://47.102.86.181:8848 #首次启动前务必修改成你自己的
+    parameters:
+      namespace: 5a2915e0-1704-4fc8-b67b-3bb3d8fa6943  # sl 自己到nacos上创建一个给dubbo用的namespce，然后和这里保持一致，首次启动前务必修改成你自己的
+      group: dp-nft #首次启动前务必修改成你自己的
+  application:
+    name: ${spring.application.name}
+    qos-enable: true
+    qos-accept-foreign-ip: false

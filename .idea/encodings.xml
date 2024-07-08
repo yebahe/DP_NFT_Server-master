@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/dp-nft-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-chain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-collection/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-goods/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-notice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-pay/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-trade/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/dp-nft-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-business/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-cache/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-datasource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-es/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-job/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-limiter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-mq/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-rpc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-sa-token/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-sms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/dp-nft-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dp-nft-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+  </component>
+</project>

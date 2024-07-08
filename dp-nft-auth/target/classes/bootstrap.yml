@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: dp-nft-auth
+  config:
+    import: classpath:config.yml

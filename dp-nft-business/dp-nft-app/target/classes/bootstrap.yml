@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: dp-nft-business
+  config:
+    import: classpath:config.yml
