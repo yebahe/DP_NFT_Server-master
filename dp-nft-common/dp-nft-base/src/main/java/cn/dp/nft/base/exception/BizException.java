@@ -1,7 +1,7 @@
 package cn.dp.nft.base.exception;
 
 /**
- * 业务异常
+ * 业务异常  ： AuthException\ChainException\CollectionException\UserException
  *
  * @author yebahe
  */

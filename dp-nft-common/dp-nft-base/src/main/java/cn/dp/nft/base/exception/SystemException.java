@@ -1,7 +1,7 @@
 package cn.dp.nft.base.exception;
 
 /**
- * 系统异常
+ * 系统异常 RemoteCallException 远程调用异常
  *
  * @author yebahe
  */
