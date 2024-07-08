@@ -1,10 +1,15 @@
 package cn.dp.nft.base.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 业务异常  ： AuthException\ChainException\CollectionException\UserException
  *
  * @author yebahe
  */
+@Setter
+@Getter
 public class BizException extends RuntimeException {
 
     private ErrorCode errorCode;

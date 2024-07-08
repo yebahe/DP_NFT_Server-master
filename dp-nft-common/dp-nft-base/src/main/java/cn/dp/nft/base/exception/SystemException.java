@@ -1,10 +1,15 @@
 package cn.dp.nft.base.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 系统异常 RemoteCallException 远程调用异常
  *
  * @author yebahe
  */
+@Setter
+@Getter
 public class SystemException extends RuntimeException {
 
     private ErrorCode errorCode;
