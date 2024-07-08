@@ -16,8 +16,7 @@ import java.io.Serializable;
 @ToString
 public class BaseResponse implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    private Boolean success;
+    private Boolean success;  //
 
     private String responseCode;
 
