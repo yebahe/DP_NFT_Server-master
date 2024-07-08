@@ -48,12 +48,12 @@ public class RemoteCallWrapper {
 
     public static <T, R> R call(Function<T, R> function, T request, String requestName, boolean checkResponse,
                                 boolean checkResponseCode) {
-        StopWatch stopWatch = new StopWatch();
+        StopWatch stopWatch = new StopWatch(); //用于简单地测量和跟踪代码执行时间
         R response = null;
         try {
 
             stopWatch.start();
-            response = function.apply(request);
+            response = function.apply(request); // 函数式编程
             stopWatch.stop();
             if (checkResponse) {
 
