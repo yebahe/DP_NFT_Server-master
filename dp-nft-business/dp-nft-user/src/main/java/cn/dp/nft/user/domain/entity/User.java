@@ -123,4 +123,6 @@ public class User extends BaseEntity {
     public boolean canModifyInfo() {
         return state == UserStateEnum.INIT || state == UserStateEnum.AUTH || state == UserStateEnum.ACTIVE;
     }
+
+
 }

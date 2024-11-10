@@ -50,38 +50,38 @@ public class FacadeAnttAspect {
      * @return
      * @throws Throwable
      */
-
-    @Around("@annotation(cn.dp.nft.rpc.facade.FacadeAntt)")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        //
-        MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
-        Method method = methodSignature.getMethod();
-        Object[] args = pjp.getArgs();
-        // 1、 检查参数是否合法
-        for (Object arg : args) {
-            //参数校验工具
-
-
-        }
-        // 方法执行前
-        // 2、方法的执行
-        try{
-            Object rpcResponse = pjp.proceed(); // 目标方法的执行
-            // 将返回消息配置好
-            enrichObject(rpcResponse);
-
-            // 打印日志
-
-
-        }catch{
-
-        }
-
-
-        // 方法执行后
-
-
-    }
+//
+//    @Around("@annotation(cn.dp.nft.rpc.facade.FacadeAntt)")
+//    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+//        //
+//        MethodSignature methodSignature = (MethodSignature)pjp.getSignature();
+//        Method method = methodSignature.getMethod();
+//        Object[] args = pjp.getArgs();
+//        // 1、 检查参数是否合法
+//        for (Object arg : args) {
+//            //参数校验工具
+//
+//
+//        }
+//        // 方法执行前
+//        // 2、方法的执行
+//        try{
+//            Object rpcResponse = pjp.proceed(); // 目标方法的执行
+//            // 将返回消息配置好
+//            enrichObject(rpcResponse);
+//
+//            // 打印日志
+//
+//
+//        }catch{
+//
+//        }
+//
+//
+//        // 方法执行后
+//
+//
+//    }
     @Before("")
     public void before(JoinPoint joinPoint) {
 

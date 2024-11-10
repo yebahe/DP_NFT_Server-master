@@ -33,16 +33,24 @@ import cn.dp.nft.collection.domain.request.HeldCollectionTransferRequest;
 import cn.dp.nft.collection.domain.response.CollectionConfirmSaleResponse;
 import cn.dp.nft.collection.domain.service.impl.redis.CollectionInventoryRedisService;
 import cn.dp.nft.rpc.facade.Facade;
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.JSON;
+import com.alicp.jetcache.Cache;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
 /**
  * 藏品服务
@@ -68,6 +76,15 @@ public class CollectionFacadeServiceImpl implements CollectionFacadeService {
 
     @Autowired
     private CollectionInventoryRedisService collectionInventoryRedisService;
+
+    @Autowired
+    private   Cache<Long, CollectionVO> caffeineCache;
+
+    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedissonClient redissonClient;
+
+
 
     @Override
     @Facade
@@ -241,20 +258,57 @@ public class CollectionFacadeServiceImpl implements CollectionFacadeService {
     @Override
     @Facade
     public SingleResponse<CollectionVO> queryById(Long collectionId) {
-        Collection collection = collectionService.queryById(collectionId);
-
-        CollectionInventoryRequest request = new CollectionInventoryRequest();
-        request.setCollectionId(collectionId.toString());
-        Integer inventory = collectionInventoryRedisService.getInventory(request);
-
-        if (inventory == null) {
-            inventory = 0;
+        // 1. 查询 Caffeine 本地缓存
+        Object cachedData = caffeineCache.get(collectionId);
+        if (cachedData != null) {
+            return (SingleResponse<CollectionVO>) cachedData;
         }
 
-        CollectionVO collectionVO = CollectionConvertor.INSTANCE.mapToVo(collection);
-        collectionVO.setInventory(inventory.longValue());
-        collectionVO.setState(collection.getState(), collection.getSaleTime(), inventory.longValue());
-        return SingleResponse.of(collectionVO);
+        // 2. 查询 Redis 缓存
+        cachedData = redisTemplate.opsForValue().get(collectionId);
+        if (cachedData != null) {
+            // 更新 Caffeine 本地缓存
+            caffeineCache.put(collectionId, (CollectionVO) cachedData);
+            return (SingleResponse<CollectionVO>) cachedData;
+        }
+
+        // 3. 使用 Redisson 获取锁
+        RLock lock = redissonClient.getLock("collectionLock:" + collectionId);
+        try {
+            long maxWaitTime = 5; // 设置最大等待时间
+            long leaseTime = 10; // 设置锁的租约时间
+            if (lock.tryLock(maxWaitTime, leaseTime, TimeUnit.SECONDS)) {
+                try {
+                    // 4. 查询数据库
+                    Collection dbData = collectionService.queryById(collectionId);
+                    Integer inventory = collectionInventoryRedisService.getInventory(new CollectionInventoryRequest(collectionId.toString()));
+
+                    if (inventory == null) {
+                        inventory = 0;
+                    }
+
+                    CollectionVO collectionVO = CollectionConvertor.INSTANCE.mapToVo(dbData);
+                    collectionVO.setInventory(inventory.longValue());
+                    collectionVO.setState(dbData.getState(), dbData.getSaleTime(), inventory.longValue());
+
+                    // 5. 插入 Redis 并更新 Caffeine 缓存
+                    redisTemplate.opsForValue().set(String.valueOf(collectionId), collectionVO);
+                    caffeineCache.put(collectionId, collectionVO);
+
+                    return (SingleResponse<CollectionVO>) collectionVO;
+                } finally {
+                    // 确保释放锁
+                    lock.unlock();
+                }
+            } else {
+                // 锁获取失败的处理
+                throw new RuntimeException("Database query timeout");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // 恢复中断状态
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+
     }
 
     @Override
@@ -321,6 +375,10 @@ public class CollectionFacadeServiceImpl implements CollectionFacadeService {
     @Override
     public SingleResponse<HeldCollectionVO> queryHeldCollectionById(Long heldCollectionId) {
         HeldCollection transferCollection = heldCollectionService.queryById(heldCollectionId);
+
+
         return SingleResponse.of(HeldCollectionConvertor.INSTANCE.mapToVo(transferCollection));
     }
+
+
 }

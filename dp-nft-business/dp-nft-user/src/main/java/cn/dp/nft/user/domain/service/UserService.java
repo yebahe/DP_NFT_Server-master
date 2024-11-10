@@ -24,6 +24,8 @@ import com.alicp.jetcache.anno.CacheRefresh;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.Cached;
 import com.alicp.jetcache.template.QuickConfig;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +38,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -372,4 +375,27 @@ public class UserService extends ServiceImpl<UserMapper, User> implements Initia
         }
 
     }
+
+
+
+        /**
+         * 分页查询用户
+         * @param currentPage 当前页码
+         * @param pageSize 每页显示的用户数量
+         * @return 分页用户信息
+         */
+        public Page<User> getUserPage(int currentPage, int pageSize) {
+            // 创建一个 Page 对象，指定当前页和每页大小
+            Page<User> page = new Page<>(currentPage, pageSize);
+
+            // 创建一个 QueryWrapper 用于构造查询条件
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+
+            // 可以在这里添加其他查询条件，比如用户状态、注册时间等
+            // 例如，查询状态为“有效”的用户：
+             wrapper.eq("status", "ACTIVE");
+
+            // 使用 MyBatis-Plus 的 page 方法进行分页查询
+            return userMapper.selectPage(page, wrapper);
+        }
 }

@@ -22,7 +22,6 @@ public @interface DistributeLockAntt {
     // 自定义加锁类型
     public LockTypeEnum typeEnum();
     TimeUnit unit() default TimeUnit.MILLISECONDS;
-
     // 5、
     public String key() default "lock";
 

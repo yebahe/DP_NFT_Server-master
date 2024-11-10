@@ -13,4 +13,5 @@ import org.dromara.easyes.core.kernel.BaseEsMapper;
  */
 public interface CollectionEsMapper extends BaseEsMapper<Collection> {
 
+
 }
