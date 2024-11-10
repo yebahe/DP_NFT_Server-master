@@ -1,26 +1,26 @@
 spring:
   application:
-    name: dp-nft-gateway
+    name: dp-nft-gateway  # 应用程序的名称，使用占位符以便在构建时替换
   config:
-    import: classpath:cache.yml,classpath:config.yml,classpath:limiter.yml
+    import: classpath:cache.yml,classpath:config.yml,classpath:limiter.yml  # 导入其他配置文件
   cloud:
-    gateway:
-      default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_UNIQUE
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedHeaders: '*'
-            allowedMethods: '*'
-            allowedOrigins: '*'
-      routes:
-        - id: dp-nft-auth
-          uri: lb://dp-nft-auth
-          predicates:
-            - Path=/auth/**,/token/**
-        - id: dp-nft-business
-          uri: lb://dp-nft-business
-          predicates:
-            - Path=/trade/**,/order/**,/user/**,/collection/**,/wxPay/**
+    gateway:  # 配置 Spring Cloud Gateway
+      default-filters:  # 默认过滤器配置
+        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_UNIQUE  # 去重响应头，保留唯一值
+      globalcors:  # 配置全局 CORS
+        cors-configurations:  # CORS 配置项
+          '[/**]':  # 针对所有路径的 CORS 配置
+            allowedHeaders: '*'  # 允许所有请求头
+            allowedMethods: '*'  # 允许所有 HTTP 方法
+            allowedOrigins: '*'  # 允许所有来源
+      routes:  # 路由配置
+        - id: dp-nft-auth  # 路由 ID
+          uri: lb://dp-nft-auth  # 负载均衡 URI
+          predicates:  # 路由匹配条件
+            - Path=/auth/**,/token/**  # 匹配 /auth/** 和 /token/** 路径
+        - id: dp-nft-business  # 另一个路由 ID
+          uri: lb://dp-nft-business  # 负载均衡 URI
+          predicates:  # 路由匹配条件
+            - Path=/trade/**,/order/**,/user/**,/collection/**,/wxPay/**  # 匹配多条路径
 server:
-  port: 8081
+  port: 8081  # 配置服务器端口为 8081

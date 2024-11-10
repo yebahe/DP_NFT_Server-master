@@ -10,9 +10,9 @@ spring:
     enable: false
   data:
     redis:
-      host: 47.102.86.181
+      host: 116.205.170.187
       port: 6379 # Redis服务器连接端口
-      password: 020588Sl # Redis服务器连接密码（默认为空）
+      password: 123456 # Redis服务器连接密码（默认为空）
   datasource:
     url: jdbc:h2:mem:nfturbo
     username: sa

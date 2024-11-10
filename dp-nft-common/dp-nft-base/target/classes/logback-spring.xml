@@ -6,11 +6,12 @@
     <conversionRule conversionWord="sensitive" converterClass="com.github.houbb.sensitive.logback.converter.SensitiveLogbackConverter" />
 
     <springProperty scope="context" name="app.name" source="spring.application.name"/>
-
+    <!--    ybh : 日志-->
     <property name="APP_NAME" value="${app.name}"/>
-    <property name="LOG_PATH" value="${user.home}/${APP_NAME}/logs"/>
+    <property name="LOG_PATH" value="E:/Java/IdeaProjects/DP_LOG/${APP_NAME}"/>
     <property name="LOG_FILE" value="${LOG_PATH}/application.log"/>
     <property name="FILE_LOG_PATTERN" value="%d %-5level [%thread %logger - %sensitive%n"/>
+
 
     <appender name="APPLICATION"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
